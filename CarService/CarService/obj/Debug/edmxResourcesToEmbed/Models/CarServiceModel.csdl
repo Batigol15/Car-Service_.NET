@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CarServiceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="CarServiceEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Companies" EntityType="CarServiceModel.Company" />
+    <EntitySet Name="Customers" EntityType="CarServiceModel.Customer" />
+    <EntitySet Name="Employees" EntityType="CarServiceModel.Employee" />
+    <EntitySet Name="Invoices" EntityType="CarServiceModel.Invoice" />
+    <EntitySet Name="Services" EntityType="CarServiceModel.Service" />
+    <EntitySet Name="Vehicles" EntityType="CarServiceModel.Vehicle" />
+    <EntitySet Name="WorkOrders" EntityType="CarServiceModel.WorkOrder" />
+    <EntitySet Name="WorkOrderDetaileds" EntityType="CarServiceModel.WorkOrderDetailed" />
+    <AssociationSet Name="FK_Customer_Company" Association="CarServiceModel.FK_Customer_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_Company" Association="CarServiceModel.FK_Employee_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_Company" Association="CarServiceModel.FK_Invoice_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Service_Company" Association="CarServiceModel.FK_Service_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Service" EntitySet="Services" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vehicle_Company" Association="CarServiceModel.FK_Vehicle_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Vehicle" EntitySet="Vehicles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkOrder_Company" Association="CarServiceModel.FK_WorkOrder_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="WorkOrder" EntitySet="WorkOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vehicle_Customer" Association="CarServiceModel.FK_Vehicle_Customer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Vehicle" EntitySet="Vehicles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkOrder_Employee" Association="CarServiceModel.FK_WorkOrder_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="WorkOrder" EntitySet="WorkOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_WorkOrder" Association="CarServiceModel.FK_Invoice_WorkOrder">
+      <End Role="WorkOrder" EntitySet="WorkOrders" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkOrderDetailed_Service" Association="CarServiceModel.FK_WorkOrderDetailed_Service">
+      <End Role="Service" EntitySet="Services" />
+      <End Role="WorkOrderDetailed" EntitySet="WorkOrderDetaileds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkOrder_Vehicle" Association="CarServiceModel.FK_WorkOrder_Vehicle">
+      <End Role="Vehicle" EntitySet="Vehicles" />
+      <End Role="WorkOrder" EntitySet="WorkOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkOrderDetailed_WorkOrder" Association="CarServiceModel.FK_WorkOrderDetailed_WorkOrder">
+      <End Role="WorkOrder" EntitySet="WorkOrders" />
+      <End Role="WorkOrderDetailed" EntitySet="WorkOrderDetaileds" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Contact" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Since" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="IsActive" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Customers" Relationship="CarServiceModel.FK_Customer_Company" FromRole="Company" ToRole="Customer" />
+    <NavigationProperty Name="Employees" Relationship="CarServiceModel.FK_Employee_Company" FromRole="Company" ToRole="Employee" />
+    <NavigationProperty Name="Invoices" Relationship="CarServiceModel.FK_Invoice_Company" FromRole="Company" ToRole="Invoice" />
+    <NavigationProperty Name="Services" Relationship="CarServiceModel.FK_Service_Company" FromRole="Company" ToRole="Service" />
+    <NavigationProperty Name="Vehicles" Relationship="CarServiceModel.FK_Vehicle_Company" FromRole="Company" ToRole="Vehicle" />
+    <NavigationProperty Name="WorkOrders" Relationship="CarServiceModel.FK_WorkOrder_Company" FromRole="Company" ToRole="WorkOrder" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OIB" Type="Int64" Nullable="false" />
+    <Property Name="Contact" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Since" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="IsActive" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Company" Relationship="CarServiceModel.FK_Customer_Company" FromRole="Customer" ToRole="Company" />
+    <NavigationProperty Name="Vehicles" Relationship="CarServiceModel.FK_Vehicle_Customer" FromRole="Customer" ToRole="Vehicle" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OIB" Type="Int64" Nullable="false" />
+    <Property Name="Contact" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Since" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="IsActive" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Company" Relationship="CarServiceModel.FK_Employee_Company" FromRole="Employee" ToRole="Company" />
+    <NavigationProperty Name="WorkOrders" Relationship="CarServiceModel.FK_WorkOrder_Employee" FromRole="Employee" ToRole="WorkOrder" />
+  </EntityType>
+  <EntityType Name="Invoice">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyID" Type="Int32" Nullable="false" />
+    <Property Name="WorkOrderID" Type="Int32" Nullable="false" />
+    <Property Name="TotalPrice" Type="Int32" Nullable="false" />
+    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Company" Relationship="CarServiceModel.FK_Invoice_Company" FromRole="Invoice" ToRole="Company" />
+    <NavigationProperty Name="WorkOrder" Relationship="CarServiceModel.FK_Invoice_WorkOrder" FromRole="Invoice" ToRole="WorkOrder" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Company" Relationship="CarServiceModel.FK_Service_Company" FromRole="Service" ToRole="Company" />
+    <NavigationProperty Name="WorkOrderDetaileds" Relationship="CarServiceModel.FK_WorkOrderDetailed_Service" FromRole="Service" ToRole="WorkOrderDetailed" />
+  </EntityType>
+  <EntityType Name="Vehicle">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerID" Type="Int32" Nullable="false" />
+    <Property Name="CompanyID" Type="Int32" Nullable="false" />
+    <Property Name="Plate" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Make" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Model" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Colour" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Company" Relationship="CarServiceModel.FK_Vehicle_Company" FromRole="Vehicle" ToRole="Company" />
+    <NavigationProperty Name="Customer" Relationship="CarServiceModel.FK_Vehicle_Customer" FromRole="Vehicle" ToRole="Customer" />
+    <NavigationProperty Name="WorkOrders" Relationship="CarServiceModel.FK_WorkOrder_Vehicle" FromRole="Vehicle" ToRole="WorkOrder" />
+  </EntityType>
+  <EntityType Name="WorkOrder">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyID" Type="Int32" Nullable="false" />
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+    <Property Name="VehicleID" Type="Int32" Nullable="false" />
+    <Property Name="VehicleKm" Type="Int32" Nullable="false" />
+    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsActive" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Company" Relationship="CarServiceModel.FK_WorkOrder_Company" FromRole="WorkOrder" ToRole="Company" />
+    <NavigationProperty Name="Employee" Relationship="CarServiceModel.FK_WorkOrder_Employee" FromRole="WorkOrder" ToRole="Employee" />
+    <NavigationProperty Name="Invoices" Relationship="CarServiceModel.FK_Invoice_WorkOrder" FromRole="WorkOrder" ToRole="Invoice" />
+    <NavigationProperty Name="Vehicle" Relationship="CarServiceModel.FK_WorkOrder_Vehicle" FromRole="WorkOrder" ToRole="Vehicle" />
+    <NavigationProperty Name="WorkOrderDetaileds" Relationship="CarServiceModel.FK_WorkOrderDetailed_WorkOrder" FromRole="WorkOrder" ToRole="WorkOrderDetailed" />
+  </EntityType>
+  <EntityType Name="WorkOrderDetailed">
+    <Key>
+      <PropertyRef Name="WorkOrderID" />
+      <PropertyRef Name="ServiceID" />
+      <PropertyRef Name="ServiceQuantity" />
+    </Key>
+    <Property Name="WorkOrderID" Type="Int32" Nullable="false" />
+    <Property Name="ServiceID" Type="Int32" Nullable="false" />
+    <Property Name="ServiceQuantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Service" Relationship="CarServiceModel.FK_WorkOrderDetailed_Service" FromRole="WorkOrderDetailed" ToRole="Service" />
+    <NavigationProperty Name="WorkOrder" Relationship="CarServiceModel.FK_WorkOrderDetailed_WorkOrder" FromRole="WorkOrderDetailed" ToRole="WorkOrder" />
+  </EntityType>
+  <Association Name="FK_Customer_Company">
+    <End Type="CarServiceModel.Company" Role="Company" Multiplicity="1" />
+    <End Type="CarServiceModel.Customer" Role="Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee_Company">
+    <End Type="CarServiceModel.Company" Role="Company" Multiplicity="1" />
+    <End Type="CarServiceModel.Employee" Role="Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_Company">
+    <End Type="CarServiceModel.Company" Role="Company" Multiplicity="1" />
+    <End Type="CarServiceModel.Invoice" Role="Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Service_Company">
+    <End Type="CarServiceModel.Company" Role="Company" Multiplicity="1" />
+    <End Type="CarServiceModel.Service" Role="Service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Service">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vehicle_Company">
+    <End Type="CarServiceModel.Company" Role="Company" Multiplicity="1" />
+    <End Type="CarServiceModel.Vehicle" Role="Vehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Vehicle">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkOrder_Company">
+    <End Type="CarServiceModel.Company" Role="Company" Multiplicity="1" />
+    <End Type="CarServiceModel.WorkOrder" Role="WorkOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WorkOrder">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vehicle_Customer">
+    <End Type="CarServiceModel.Customer" Role="Customer" Multiplicity="1" />
+    <End Type="CarServiceModel.Vehicle" Role="Vehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Vehicle">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkOrder_Employee">
+    <End Type="CarServiceModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="CarServiceModel.WorkOrder" Role="WorkOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WorkOrder">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_WorkOrder">
+    <End Type="CarServiceModel.WorkOrder" Role="WorkOrder" Multiplicity="1" />
+    <End Type="CarServiceModel.Invoice" Role="Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkOrder">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="WorkOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkOrderDetailed_Service">
+    <End Type="CarServiceModel.Service" Role="Service" Multiplicity="1" />
+    <End Type="CarServiceModel.WorkOrderDetailed" Role="WorkOrderDetailed" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WorkOrderDetailed">
+        <PropertyRef Name="ServiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkOrder_Vehicle">
+    <End Type="CarServiceModel.Vehicle" Role="Vehicle" Multiplicity="1" />
+    <End Type="CarServiceModel.WorkOrder" Role="WorkOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehicle">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WorkOrder">
+        <PropertyRef Name="VehicleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkOrderDetailed_WorkOrder">
+    <End Type="CarServiceModel.WorkOrder" Role="WorkOrder" Multiplicity="1" />
+    <End Type="CarServiceModel.WorkOrderDetailed" Role="WorkOrderDetailed" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkOrder">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WorkOrderDetailed">
+        <PropertyRef Name="WorkOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
